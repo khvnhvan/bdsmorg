@@ -1,0 +1,511 @@
+@import url('https://fonts.cdnfonts.com/css/josefin-sans');
+@import url('https://fonts.cdnfonts.com/css/gochi-hand');
+
+body {
+    background-color: #CCD8BD;
+    min-height: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.login-outside-container {
+    width: 90%;
+    height: 90%;
+    background-color: #668884;
+    border-radius: 30px;
+    box-shadow: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-inside-container {
+    width: 90%;
+    height: 90%;
+    background-color: #EED9D8;
+    color: #668884;
+    border-radius: 30px;
+    box-shadow: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: x-large;
+}
+
+.login-inside-container-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-inside-container-content input {
+    font-size: x-large;
+}
+
+.login-inside-container-content button {
+    font-size: x-large;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 20px 10px;
+    border: 4px solid #668884;
+}
+
+.login-inside-container-content label {
+    font-size: xx-large;
+}
+
+.vertical-navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 18%;
+    background-color: #668884;
+    color: #EED9D8;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    font-size: x-large;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    z-index: 1;
+}
+
+
+.vertical-navbar::-webkit-scrollbar {
+    position: absolute;
+    right: 0;
+}
+
+.vertical-navbar img {
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 40%;
+    height: auto;
+    border-radius: 50%;
+    border: 4px solid black;
+}
+
+li a {
+    display: block;
+    color: #EED9D8;
+    padding: 8% 5%;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #414A5D;
+    color: #EED9D8;
+}
+
+li a:hover:not(.active) {
+    background-color: #414A5D;
+    color: #EED9D8;
+}
+
+.dashboard {
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    background-color: #EED9D8;
+    color: #414A5D;
+    position: absolute;
+    min-height: 100%;
+}
+
+.dashboard-container {
+    width: 80%;
+    height: auto;
+    margin-left: 21%;
+    position: sticky;
+}
+
+.dashboard-left-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.dashboard-title {
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard-title-1 {
+    font-size: 300%;
+}
+
+.dashboard-div-1 {
+    width: 50%;
+    height: auto;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.dashboard-div-3 {
+    width: 90%;
+    height: auto;
+    background-color: #F7E9E8;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.dashboard-div-1 div {
+    width: 90%;
+    height: auto;
+    background-color: #F7E9E8;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin-top: 2%;
+}
+
+.dashboard-div-3 svg {
+    width: 60%;
+    height: auto;
+}
+
+.dashboard-div-4 img {
+    width: 70%;
+    height: auto;
+}
+
+.dashboard-div-5 img {
+    width: 70%;
+    height: auto;
+}
+
+.dashboard-div-2 {
+    margin-top: 1%;
+    width: 50%;
+    height: auto;
+}
+
+.dashboard-div-6-1 {
+    width: 97%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #F7E9E8;
+    font-size: xx-large;
+}
+
+.dashboard-div-6-2 {
+    width: 100%;
+    display: flex;
+    margin-top: 2%;
+}
+
+.dashboard-div-6-2-1 {
+    width: 95%;
+    height: auto;
+    background-color: #F7E9E8;
+    text-align: center;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-div-6-2-2 {
+    width: 95%;
+    height: auto;
+    background-color: #F7E9E8;
+    text-align: center;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+.dashboard-div-6-2-3 {
+    width: 95%;
+    height: auto;
+    background-color: #F7E9E8;
+    text-align: center;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-div-6-2-4 {
+    width: 95%;
+    height: auto;
+    background-color: #F7E9E8;
+    text-align: center;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+
+.blood-type-o {
+    font-size: 290%;
+    color: #DA4239;
+}
+
+.blood-type {
+    font-size: 290%;
+    color: #DA4239;
+}
+
+.blood-amount {
+    font-size: 250%;
+}
+
+.blood-amount-title {
+    font-size: 140%;
+}
+
+.dashboard-div-7 {
+    width: 100%;
+    height: auto;
+    background-color: #F7E9E8;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin-top: 2%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.dashboard-div-8 {
+    margin-top: 2%;
+    width: 100%;
+    height: auto;
+    background-color: #F7E9E8;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: #414A5D;
+}
+
+.org-info-content {
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.org-info-content-left {
+    width: 30%;
+    font-size: xx-large;
+    background-color: #F7E9E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.org-info-content-right {
+    width: 55%;
+    font-size: xx-large;
+    background-color: #F7E9E8;
+    padding: 3%;
+}
+
+
+.org-info-content-right td {
+    width: 400px;
+}
+
+.org-info-content-right th,
+td {
+    padding: 2%;
+    border: 0;
+}
+
+.donator-info-title-1 {
+    font-size: 200%;
+}
+
+.turn-back-button {
+    width: auto;
+    padding: 10px 20px;
+    height: auto;
+    color: #414A5D;
+    border: 4px solid #668884;
+    background: none;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: xx-large;
+}
+
+.create-booking {
+    font-size: xx-large;
+    line-height: 150%;
+    width: 80%;
+    height: auto;
+    background-color: #F7E9E8;
+    padding: 5%;
+}
+
+input {
+    background: none;
+    color: #414A5D;
+}
+
+.cal-alert {
+    margin-left: 25%;
+    margin-top: 30%;
+    color: #414A5D;
+}
+
+.dashboard-container table,
+th,
+td {
+    border: 2px solid #414A5D;
+    border-collapse: collapse;
+    font-size: 90%;
+}
+
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+.update-btn {
+    width: auto;
+    padding: 5px 8px;
+    height: auto;
+    color: #EED9D8;
+    border: 2px solid #414A5D;
+    background: none;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: medium;
+    background: #668884;
+}
+
+.view-btn {
+    width: auto;
+    padding: 5px 8px;
+    height: auto;
+    color: #EED9D8;
+    border: 2px solid #414A5D;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: medium;
+    background: #676c80;
+}
+
+.view-btn-2 {
+    width: auto;
+    padding: 5px 8px;
+    height: auto;
+    color: #EED9D8;
+    border: 2px solid #414A5D;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: medium;
+    background: #676c80;
+}
+
+.delete-btn {
+    width: auto;
+    padding: 5px 8px;
+    height: auto;
+    color: #EED9D8;
+    border: 2px solid #414A5D;
+    background: none;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: medium;
+    background: #DA4239;
+}
+
+.update-donator-info-form {
+    display: flex;
+    font-size: x-large;
+    align-items: center;
+
+}
+
+.update-donator-info-form input {
+    font-size: x-large;
+    font-family: 'Josefin Sans', sans-serif;
+    background: none;
+    padding: 5px;
+    color: #414A5D;
+}
+
+.update-donator-info-form select,
+option {
+    font-size: x-large;
+    font-family: 'Josefin Sans', sans-serif;
+    background: none;
+    padding: 5px;
+    color: #414A5D;
+}
+
+.update-donator-info .submit {
+    width: auto;
+    padding: 10px 20px;
+    height: auto;
+    color: #EED9D8;
+    border: 4px solid #414A5D;
+    background: none;
+    box-shadow: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: xx-large;
+    background: #668884;
+}
+
+.org-info-content-right table,
+.org-info-content-right th,
+.org-info-content-right td,
+.org-info-content-right tr {
+    border: 0;
+}
+
+table {
+    font-weight: bold;
+}
+
+.clinic-info-content {
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.clinic-info-content-left {
+    width: 42%;
+    font-size: xx-large;
+    background-color: #F7E9E8;
+    padding: 3%;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.clinic-info-content-right {
+    width: 42%;
+    font-size: xx-large;
+    background-color: #F7E9E8;
+    padding: 3%;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.clinic-info-content-left::-webkit-scrollbar {
+    position: absolute;
+    right: 0;
+}
+
+.clinic-info-content-right::-webkit-scrollbar {
+    position: absolute;
+    right: 0;
+}
