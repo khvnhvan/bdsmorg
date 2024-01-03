@@ -219,15 +219,21 @@ class OrganizerController extends Controller
         return $client;
     }
 
-    public function update_infoinday(string $id){
+    public function update_infoinday($id){
         $user = DB::table('users')->get();
         $phieu = DB::table('phieudangky')->find($id);
-        return view('tochuc.update_infoinday', compact('phieu'));
+        $don = DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
+        ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
+        ->where('phieudangky.id', $id)
+        ->get();
+        return view('tochuc.update_infoinday', compact('phieu', 'don'));
     }
 
     public function update_infoinday_check(Request $request, $id){
-        $phieu = Phieudangky::findOrFail($id);
-        $phieu->update($request->all());
+        DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
+        ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
+        ->where('phieudangky.id', $id)->update($request->only('id','TrangThai'));
+        DB::table('phieudangky')->update($request->only('id', 'TrangThaiHien'));
         return redirect()->route('org.info_inday')->with('update','Cập nhật phiếu hiến thành công!');
     }
 
@@ -361,12 +367,29 @@ class OrganizerController extends Controller
             ->get();
         //SELECT * FROM `donkham` d INNER JOIN phieutraloi p on p.MaCauTL = d.MaCauTL 
         //INNER JOIN phieudangky k on k.user_id = p.user_id WHERE k.id = 1;
-        $clinic = DB::table('donkham')->select('donkham.*')
-        ->join('phieutraloi', 'phieutraloi.MaCauTL = donkham.MaCauTL')
-        ->join('phieudangky', 'phieudangky.user_id = phieutraloi.user_id')
+        $clinic = DB::table('donkham')->select('donkham.*', 'users.name')
+        ->join('phieutraloi', 'phieutraloi.MaCauTL', '=', 'donkham.MaCauTL')
+        ->join('phieudangky', 'phieudangky.user_id', '=', 'phieutraloi.user_id')
+        ->join('users', 'phieudangky.user_id', '=', 'users.id')
         ->where('phieudangky.id', '=', $id)
         ->get();
         return view('tochuc.clinic', compact('answer', 'date', 'question', 'clinic'));
+    }
+
+    public function edit_clinic($id){
+        $cl = DB::table('donkham')->select('donkham.*')->where('donkham.id', $id)->get();
+        return view('tochuc.update_clinic', compact('cl'));
+    }
+
+    public function update_clinic($id, Request $request){
+        DB::table('donkham')->where('id',$id)->update($request->only('id','CanNang','NhietDo','Hemoglobine','ViemGanB','TrangThai',
+        'Time1','HuyetAp1','Mach1','Time2','HuyetAp2','Mach2','TrangThai'));
+        $clinic = DB::table('donkham')->select('donkham.*', 'phieudangky.id')
+            ->join('phieutraloi', 'phieutraloi.MaCauTL', '=', 'donkham.MaCauTL')
+            ->join('phieudangky', 'phieudangky.user_id', '=', 'phieutraloi.user_id')
+            ->where('phieutraloi.MaCauTL', $id)
+            ->get();
+        return redirect()->route('org.clinic', $clinic[0]->MaCauTL); 
     }
 
     public function logout(){

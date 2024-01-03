@@ -37,6 +37,8 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
     Route::put('/update_emp/{id}', [OrganizerController::class, 'update_emp_check'])->name('org.update_emp_check');
     Route::delete('/delete_emp/{id}', [OrganizerController::class, 'delete_emp'])->name('org.delete_emp');
     Route::get('/clinic/{id}', [OrganizerController::class, 'clinic'])->name('org.clinic');
+    Route::get('/edit_clinic/{id}', [OrganizerController::class, 'edit_clinic'])->name('org.edit_clinic');
+    Route::put('/edit_clinic/{id}', [OrganizerController::class, 'update_clinic'])->name('org.update_clinic');
 
     Route::get('/appt_schedule', [OrganizerController::class, 'apt_schedule'])->name('org.apt_schedule');
     Route::get('/create_appt', [CalendarController::class, 'create_appt'])->name('org.create_appt');

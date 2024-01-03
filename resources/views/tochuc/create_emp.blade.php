@@ -23,22 +23,23 @@
                             <input type="text" name="id"><br><br>
                             <label for="">Họ tên</label><br>
                             <input type="text" name="name"><br><br>
+                            <label for="">Ngày sinh</label><br>
+                            <input type="date" name="birthday""><br><br>
                             <label for="gender">Giới tính</label><br>
                             <input type="radio" name="gender" value="1">Nam
                             <input type="radio" name="gender" value="0">Nữ
-                            <br> <br>
-                            <label for="">Vị trí</label><br>
-                            <input type="radio" name="role" value="1">Nhân viên (Y tá, lễ tân) <br>
-                            <input type="radio" name="role" value="2">Bác sĩ
                             <br> <br>
                         </div>
                         <div style="width: 45%;">
                             <label for="">SĐT</label><br>
                             <input type="text" name="phone"><br><br>
-                            <label for="">Ngày sinh</label><br>
-                            <input type="date" name="birthday""><br><br>
                             <label for="id_num">Địa chỉ</label><br>
                             <input type="text" name="address"><br><br>
+                            <label for="">Vị trí</label><br>
+                            <input type="radio" name="role" value="1">Nhân viên (Y tá, lễ tân) <br>
+                            <input type="radio" name="role" value="2">Bác sĩ <br>
+                            <input type="radio" name="role" value="5">Quản lí cung ứng máu
+                            <br> <br>
                             <input type="password" name="password" value="123456" hidden>
                         </div>
                     </div>

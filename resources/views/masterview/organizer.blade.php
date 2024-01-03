@@ -15,6 +15,7 @@
     <ul class="vertical-navbar">
         <li><img src="{{ url('public/organizersite') }}/img/bdsm_logo.png" alt="" class="bdsm_logo"></li>
         <li><a href="{{ route('org.dashboard') }}">DASHBOARD</a></li>
+        <li><a href="">CUNG ỨNG MÁU</a></li>
         <li><a href="{{ route('org.org_info') }}">THÔNG TIN NHÂN VIÊN</a></li>
         <li><a href="{{ route('org.cus_info') }}">THÔNG TIN NGƯỜI HIẾN MÁU</a></li>
         <li><a href="{{ route('org.info_inday') }}">THÔNG TIN NGƯỜI HIẾN MÁU TRONG NGÀY</a></li>

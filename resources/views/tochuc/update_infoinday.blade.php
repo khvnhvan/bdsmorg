@@ -23,10 +23,10 @@
                         </div>
                         <div style="width: 45%;">
                             <label for="">Chấp thuận của bác sĩ:</label><br>
-                            <input type="radio" name="Ykienbacsi" value="1"
-                                {{ $phieu->Ykienbacsi == 1 ? 'checked' : '' }}>Được hiến
-                            <input type="radio" name="Ykienbacsi" value="0"
-                                {{ $phieu->Ykienbacsi == 0 ? 'checked' : '' }}>Không được hiến
+                            <input type="radio" name="TrangThai" value="1"
+                                {{ $don[0]->TrangThai == 1 ? 'checked' : '' }}>Được hiến
+                            <input type="radio" name="TrangThai" value="0"
+                                {{ $don[0]->TrangThai == 0 ? 'checked' : '' }}>Không được hiến
                             <br><br>
                             <label for="gender">Trạng thái hiến:</label><br>
                             <input type="radio" name="TrangThaiHien" value="1"
