@@ -3,7 +3,7 @@
 
     <div class="dashboard-container">
         <div class="dashboard-title">
-            <h1 class="donator-info-title-1">THÔNG TIN <br>NGƯỜI HIẾN MÁU</h1>
+            <h1 class="donator-info-title-1">THÔNG TIN <br>NGƯỜI DÙNG</h1>
             <h1 style="text-align: right;">THE BDSM <br>PROJECT</h1>
         </div>
         <br><br>

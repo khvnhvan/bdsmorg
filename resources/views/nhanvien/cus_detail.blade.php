@@ -3,7 +3,7 @@
 
     <div class="dashboard-container">
         <div class="dashboard-title">
-            <h1 class="donator-info-title-1">THÔNG TIN <br>NGƯỜI HIẾN MÁU</h1>
+            <h1 class="donator-info-title-1">THÔNG TIN <br>NGƯỜI DÙNG</h1>
             <h1 style="text-align: right;">THE BDSM <br>PROJECT</h1>
         </div>
         <br>
@@ -15,7 +15,7 @@
         <div style="width: 85%; background-color: #F7E9E8; padding: 5%; ">
             <div>
                 <div class="update-donator-info">
-                    <h1 style="text-align: center;">THÔNG TIN CHI TIẾT NGƯỜI HIẾN MÁU</h1>
+                    <h1 style="text-align: center;">THÔNG TIN CHI TIẾT NGƯỜI DÙNG</h1>
                     <div class="update-donator-info-form">
                         <div style="width: 45%;">
                             <p>Họ tên: {{ $detail->name }}</p>

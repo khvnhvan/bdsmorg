@@ -26,7 +26,7 @@
                         <div style="width: 45%;">
                             <p>Giới tính: {{ $detail->gender == 1 ? 'Nam' : 'Nữ' }}</p>
                             <p>Nơi cư trú: {{ $detail->address }}</p>
-                            <p>Nơi công tác: {{ $detail->workspace }}</p>
+                            <p>Nơi công tác: {{ $detail->workplace }}</p>
                             <p>Email: {{ $detail->email }}</p>
                             <label for="id_num"></label><br>
                         </div>
@@ -37,7 +37,7 @@
                 <div class="donator-reg-history">
                     <h1 style="text-align: center;">LỊCH SỬ CÁC LẦN ĐÃ HIẾU MÁU</h1>
                     <div class="donate-reg-history-content">
-                        
+
                         {{-- @if (($detail->NgayHien = null) and ($detail->LuongMau = null))
                             <p>{{ $detail->name }} chưa hiến máu lần nào!</p>
                         @else
