@@ -84,7 +84,7 @@ class EmployeeController extends Controller
             $client = DB::table('users')
             ->select('users.*', 'nhommau.NhomMau')
             -> join('nhommau', 'nhommau.MaMau', '=', 'users.MaMau')
-            -> where('workspace',$work)
+            -> where('workplace',$work)
             -> paginate(10);
         }
         return view('nhanvien.cus_info', compact('client','orderBy'));
@@ -220,15 +220,21 @@ class EmployeeController extends Controller
         return $client;
     }
 
-    public function update_infoinday(string $id){
+    public function update_infoinday($id){
         $user = DB::table('users')->get();
         $phieu = DB::table('phieudangky')->find($id);
-        return view('nhanvien.update_infoinday', compact('phieu'));
+        $don = DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
+        ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
+        ->where('phieudangky.id', $id)
+        ->get();
+        return view('nhanvien.update_infoinday', compact('phieu', 'don'));
     }
 
     public function update_infoinday_check(Request $request, $id){
-        $phieu = Phieudangky::findOrFail($id);
-        $phieu->update($request->all());
+        // DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
+        // ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
+        // ->where('phieudangky.id', $id)->update($request->only('id','TrangThai'));
+        DB::table('phieudangky')->update($request->only('id', 'TrangThaiHien', 'Ykienbacsi'));
         return redirect()->route('emp.info_inday')->with('update','Cập nhật phiếu hiến thành công!');
     }
     
@@ -244,26 +250,21 @@ class EmployeeController extends Controller
     }
 
     public function store_cus(Request $request){
-        $request -> validate([
-            'id'=>'required|max:12|unique:users,id',
+        $request->validate([
+            'id' => 'required|max:12|unique:users,id',
             'name' => 'required',
             'gender' => 'required',
             'MaMau' => 'required',
-            'phone' => 'required|max:12|unique:users,phone',
+            'phone' => 'required|max:20|unique:users,phone',
             'address' => 'required',
             'birthday' => 'required',
-            'role'=>'required',
+            'password' => 'required',
+            'role' => 'required',
             'updated_at' => 'nullable',
             'created_at' => 'nullable'
         ]);
-        DB::table('users')->insert($request->only('id',
-        'name',
-        'gender',
-        'MaMau',
-        'phone',
-        'address',
-        'birthday',
-        'role'));
+    
+        User::create($request->all());
         return redirect()->route('emp.cus_info')->with('success','Thêm người hiến mới thành công!');
     }
 
@@ -291,9 +292,39 @@ class EmployeeController extends Controller
         return view('nhanvien.appt_schedule', compact('appointment'));
     }
 
-    public function clinic(){
-        return view('nhanvien.clinic');
-    }
+    public function clinic($id){
+            $ngayHienTai = date('20y-m-d');
+    
+            $answer_id = DB::table('phieudangky')
+            ->select('phieudangky.MaCauTL')
+            ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
+            ->where('phieudangky.id', '=', $id, 'and', 'lichhienmau.NgayHien', '=', $ngayHienTai)
+            ->get();
+            
+            $answer = DB::table('phieutraloi')
+                ->select('phieutraloi.*')
+                ->where('phieutraloi.MaCauTL', $answer_id[0]->MaCauTL)
+                ->get();
+             
+            $date = DB::table('phieudangky')
+                ->select('lichhienmau.NgayHien')
+                ->join('lichhienmau', 'lichhienmau.id', '=', 'phieudangky.id_lich')
+                ->where('phieudangky.MaCauTL', '=', $answer[0]->MaCauTL)
+                ->get();
+    
+            $question = DB::table('cauhoi')
+                ->select('cauhoi.*')
+                ->get();
+            //SELECT * FROM `donkham` d INNER JOIN phieutraloi p on p.MaCauTL = d.MaCauTL 
+            //INNER JOIN phieudangky k on k.user_id = p.user_id WHERE k.id = 1;
+            $clinic = DB::table('donkham')->select('donkham.*', 'users.name')
+            ->join('phieutraloi', 'phieutraloi.MaCauTL', '=', 'donkham.MaCauTL')
+            ->join('phieudangky', 'phieudangky.user_id', '=', 'phieutraloi.user_id')
+            ->join('users', 'phieudangky.user_id', '=', 'users.id')
+            ->where('phieudangky.id', '=', $id)
+            ->get();
+            return view('nhanvien.clinic', compact('answer', 'date', 'question', 'clinic'));
+        }
 
     public function logout(){
         Auth::logout();

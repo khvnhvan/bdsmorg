@@ -1,5 +1,5 @@
-@extends('masterview.employee')
-@section('empmain')
+@extends('masterview.doctor')
+@section('docmain')
 
     <div class="dashboard-container">
         <div class="dashboard-title">
@@ -8,10 +8,10 @@
         </div>
         <br><br>
 
-        <a href="{{ route('emp.cus_info') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
+        <a href="{{ route('doc.cus_info') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
 
         <br><br><br>
-        <form action="{{ route('emp.update_cus_check', $customer->id) }}" method="POST"
+        <form action="{{ route('doc.update_cus_check', $customer->id) }}" method="POST"
             style="width: 85%; background-color: #F7E9E8; padding: 5%; ">
             @csrf @method('PUT')
             <div>

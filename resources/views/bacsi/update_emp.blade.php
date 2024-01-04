@@ -8,10 +8,10 @@
         </div>
         <br><br>
 
-        <a href="{{ route('emp.emp_info') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
+        <a href="{{ route('doc.emp_info') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
 
         <br><br><br>
-        <form action="{{ route('emp.update_emp_check', $employee->id) }}" method="POST"
+        <form action="{{ route('doc.update_emp_check', $employee->id) }}" method="POST"
             style="width: 85%; background-color: #F7E9E8; padding: 5%; ">
             @csrf @method('PUT')
             <div>

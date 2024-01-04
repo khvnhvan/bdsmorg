@@ -68,90 +68,13 @@
                     <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
                     <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
                     <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('doc.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
                         <a href="{{ route('doc.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                 nhật</button></a>
-                        <button class="update-btn">Khám sàng lọc</button>
+                        <a href="{{ route('doc.check_clinic_homnay', $cl->user_id) }}"><button class="update-btn">Khám sàng
+                                lọc</button></a>
                     </td>
                 </tr>
             @endforeach
         </table>
     </div>
-
-    <!-- Hiển thị thông tin lịch sử hiến máu ngày hôm trước -->
-    @if (isset($lichSuHomTruoc) && count($lichSuHomTruoc) > 0)
-        <h3>Ngày: {{ $ngayHomTruoc }}</h3>
-        <br>
-        <table border="2" style="background-color: #F7E9E8;">
-            <tr>
-                <th>CCCD - CMT</th>
-                <th>Tên</th>
-                <th>Nhóm máu</th>
-                <th>Giới tính</th>
-                <th>Lượng máu hiến (ml)</th>
-                <th>Ngày hiến</th>
-                <th>Chấp thuận <br>của bác sĩ</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-
-            @foreach ($lichSuHomTruoc as $cl)
-                <tr>
-                    <td>{{ $cl->user_id }}</td>
-                    <td>{{ $cl->name }}</td>
-                    <td>{{ $cl->NhomMau }}</td>
-                    <td>{{ $cl->gender == 0 ? 'Nữ' : 'Nam' }}</td>
-                    <td>{{ $cl->LuongMau }}</td>
-                    <td>{{ $cl->NgayHien }}</td>
-                    <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
-                    <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
-                    <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('doc.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
-                        <a href="{{ route('doc.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
-                                nhật</button></a>
-                        <button class="update-btn">Khám sàng lọc</button>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-
-
-    <!-- Hiển thị thông tin lịch sử hiến máu ngày hôm sau -->
-    @if (isset($lichSuHomSau) && count($lichSuHomSau) > 0)
-        <h3>Ngày: {{ $ngayHomSau }}</h3>
-        <br>
-        <table border="2" style="background-color: #F7E9E8;">
-            <tr>
-                <th>CCCD - CMT</th>
-                <th>Tên</th>
-                <th>Nhóm máu</th>
-                <th>Giới tính</th>
-                <th>Lượng máu hiến (ml)</th>
-                <th>Ngày hiến</th>
-                <th>Chấp thuận <br>của bác sĩ</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-
-            @foreach ($lichSuHomSau as $cl)
-                <tr>
-                    <td>{{ $cl->user_id }}</td>
-                    <td>{{ $cl->name }}</td>
-                    <td>{{ $cl->NhomMau }}</td>
-                    <td>{{ $cl->gender == 0 ? 'Nữ' : 'Nam' }}</td>
-                    <td>{{ $cl->LuongMau }}</td>
-                    <td>{{ $cl->NgayHien }}</td>
-                    <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
-                    <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
-                    <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('doc.clinic', $cl->id) }}"><button class="delete-btn">Đơn bệnh</button></a>
-                        <a href="{{ route('doc.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
-                                nhật</button></a>
-                        <button class="update-btn">Khám sàng lọc</button>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
 @stop()

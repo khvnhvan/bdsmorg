@@ -72,9 +72,10 @@
                     <td>{{ $cus->gender == 1 ? 'Nam' : 'Nữ' }}
                     <td>{{ $cus->phone }}</td>
                     <td>{{ $cus->address }}</td>
-                    <td>{{ $cus->workspace }}</td>
+                    <td>{{ $cus->workplace }}</td>
                     <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('doc.cus_detail', $cus->id) }}"><button class="view-btn">Chi tiết</button></a>    
+                        <a href="{{ route('doc.cus_detail', $cus->id) }}"><button class="view-btn">Chi tiết</button></a>
+                        <a href="{{ route('doc.update_cus', $cus->id) }}"><button class="update-btn">Sửa</button></a>
                     </td>
                 </tr>
             @endforeach

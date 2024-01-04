@@ -46,6 +46,9 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
     Route::get('/update_appt/{id}', [CalendarController::class, 'update_appt'])->name('org.update_appt');
     Route::put('/update_appt/{id}', [CalendarController::class, 'update_appt_check'])->name('org.update_appt_check');
     Route::delete('/delete_appt/{id}', [CalendarController::class, 'delete_appt'])->name('org.delete_appt');
+
+    Route::get('/dropshipping', [OrganizerController::class, 'dropshipping'])->name('org.dropshipping');
+
 });
 
 
@@ -74,7 +77,7 @@ Route::group(['prefix' => 'emp', 'middleware' => 'employee'],function () {
     Route::post('/create_cus', [EmployeeController::class, 'store_cus'])->name('emp.store_cus');
     Route::get('/update_cus/{id}', [EmployeeController::class, 'update_cus'])->name('emp.update_cus');
     Route::put('/update_cus/{id}', [EmployeeController::class, 'update_cus_check'])->name('emp.update_cus_check');
-    Route::get('/clinic', [EmployeeController::class, 'clinic'])->name('emp.clinic');
+    Route::get('/clinic/{id}', [EmployeeController::class, 'clinic'])->name('emp.clinic');
     Route::get('/appt_schedule', [EmployeeController::class, 'appt_schedule'])->name('emp.appt_schedule');
 });
 
@@ -103,7 +106,11 @@ Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
     Route::get('/donate-history/{ngayHienTai}/hom-sau', [DoctorController::class, 'ngayHomSau'])->name('doc.homsau');
     Route::get('/update_cus/{id}', [DoctorController::class, 'update_cus'])->name('doc.update_cus');
     Route::put('/update_cus/{id}', [DoctorController::class, 'update_cus_check'])->name('doc.update_cus_check');
-    Route::get('/clinic', [DoctorController::class, 'clinic'])->name('doc.clinic');
+    Route::get('/clinic/{id}', [DoctorController::class, 'clinic'])->name('doc.clinic');
+    Route::post('/clinic/{id}', [DoctorController::class, 'store_clinic'])->name('doc.store_clinic');
+    Route::get('/clinic/today/{id}', [DoctorController::class, 'check_clinic_homnay'])->name('doc.check_clinic_homnay');
+    Route::get('/clinic/lastday/{id}', [DoctorController::class, 'check_clinic_homtruoc'])->name('doc.check_clinic_homtruoc');
+    Route::get('/clinic/tmr/{id}', [DoctorController::class, 'check_clinic_homsau'])->name('doc.check_clinic_homsau');
 });
 
 

@@ -220,7 +220,6 @@ class OrganizerController extends Controller
     }
 
     public function update_infoinday($id){
-        $user = DB::table('users')->get();
         $phieu = DB::table('phieudangky')->find($id);
         $don = DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
         ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
@@ -230,10 +229,10 @@ class OrganizerController extends Controller
     }
 
     public function update_infoinday_check(Request $request, $id){
-        DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
-        ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
-        ->where('phieudangky.id', $id)->update($request->only('id','TrangThai'));
-        DB::table('phieudangky')->update($request->only('id', 'TrangThaiHien'));
+        // DB::table('donkham')->select('donkham.TrangThai', 'phieudangky.*')
+        // ->join('phieudangky', 'phieudangky.user_id', '=', 'donkham.user_id')
+        // ->where('phieudangky.id', $id)->update($request->only('id','TrangThai'));
+        DB::table('phieudangky')->update($request->only('id', 'TrangThaiHien', 'Ykienbacsi'));
         return redirect()->route('org.info_inday')->with('update','Cập nhật phiếu hiến thành công!');
     }
 
@@ -392,8 +391,19 @@ class OrganizerController extends Controller
         return redirect()->route('org.clinic', $clinic[0]->MaCauTL); 
     }
 
+    public function dropshipping(){
+        $cungung = DB::table('cungungmau')->select('cungungmau.*', 'benhvien.TenVien', 'benhvien.id', 'nhommau.NhomMau')
+        ->join('nhommau', 'nhommau.MaMau', '=', 'cungungmau.MaMau')
+        ->join('benhvien', 'benhvien.id', '=', 'cungungmau.id_vien')
+        ->get();
+        return view('tochuc.dropshipping', compact('cungung'));
+    }
+
+    
+
     public function logout(){
         Auth::logout();
         return redirect()->route('org.login');
     }
+
 }

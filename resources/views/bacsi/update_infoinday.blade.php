@@ -9,10 +9,10 @@
         </div>
         <br><br>
 
-        <a href="{{ route('emp.info_inday') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
+        <a href="{{ route('doc.info_inday') }}"><button class="turn-back-button">QUAY LẠI<I></I></button></a>
 
         <br><br><br>
-        <form action="{{ route('emp.update_infoinday_check', $phieu->id) }}" method="POST"
+        <form action="{{ route('doc.update_infoinday_check', $phieu->id) }}" method="POST"
             style="width: 85%; background-color: #F7E9E8; padding: 5%; ">
             @csrf @method('PUT')
             <div>

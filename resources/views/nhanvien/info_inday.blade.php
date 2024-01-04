@@ -65,14 +65,13 @@
                     <td>{{ $cl->gender == 0 ? 'Nữ' : 'Nam' }}</td>
                     <td>{{ $cl->LuongMau }}</td>
                     <td>{{ $cl->NgayHien }}</td>
-                    <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
+                    <td>{{ $cl->TrangThai == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
                     <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
                     <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('emp.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
+                        <a href="{{ route('emp.clinic', $cl->id) }}"><button class="delete-btn">Đơn bệnh</button></a>
                         <a href="{{ route('emp.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                 nhật</button></a>
                         <a href="#"><button class="delete-btn">Xóa</button></a>
-                        <button class="update-btn">Chứng nhận</button>
                     </td>
                 </tr>
             @endforeach
@@ -104,14 +103,13 @@
                     <td>{{ $cl->gender == 0 ? 'Nữ' : 'Nam' }}</td>
                     <td>{{ $cl->LuongMau }}</td>
                     <td>{{ $cl->NgayHien }}</td>
-                    <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
+                    <td>{{ $cl->TrangThai == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
                     <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
                     <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('emp.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
+                        <a href="{{ route('emp.clinic', $cl->id) }}"><button class="delete-btn">Đơn bệnh</button></a>
                         <a href="{{ route('emp.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                 nhật</button></a>
                         <a href="#"><button class="delete-btn">Xóa</button></a>
-                        <button class="update-btn">Chứng nhận</button>
                     </td>
                 </tr>
             @endforeach
@@ -144,14 +142,13 @@
                     <td>{{ $cl->gender == 0 ? 'Nữ' : 'Nam' }}</td>
                     <td>{{ $cl->LuongMau }}</td>
                     <td>{{ $cl->NgayHien }}</td>
-                    <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
+                    <td>{{ $cl->TrangThai == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
                     <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
                     <td style=" display: flexbox; justify-content: space-around ;">
-                        <a href="{{ route('org.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
+                        <a href="{{ route('org.clinic', $cl->id) }}"><button class="delete-btn">Đơn bệnh</button></a>
                         <a href="{{ route('org.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                 nhật</button></a>
                         <a href="#"><button class="delete-btn">Xóa</button></a>
-                        <button class="update-btn">Chứng nhận</button>
                     </td>
                 </tr>
             @endforeach

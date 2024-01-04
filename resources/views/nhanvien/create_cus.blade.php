@@ -29,19 +29,22 @@
                                     <option value="{{ $bl->MaMau }}">{{ $bl->NhomMau }}</option>
                                 @endforeach
                             </select> <br> <br>
-                            <label for="">SĐT</label><br>
-                            <input type="text" name="phone"><br><br>
                             <label for="">Ngày sinh</label><br>
-                            <input type="date" name="birthday""><br><br>
+                            <input type="date" name="birthday""> <br> <br>
                         </div>
                         <div style="width: 45%;">
+                            <label for="">SĐT</label><br>
+                            <input type="text" name="phone"><br><br>
                             <label for="gender">Giới tính</label><br>
                             <input type="radio" name="gender" value="1">Nam
                             <input type="radio" name="gender" value="0">Nữ
                             <br><br>
-                            <label for="id_num">Địa chỉ</label><br>
+                            <label for="id_num">Nơi cư trú</label><br>
                             <input type="text" name="address"><br><br>
-                            <input type="text" name="role" value="4" hidden><br><br>                        
+                            <label for="id_num">Nơi công tác</label><br>
+                            <input type="text" name="workspace"><br><br>
+                            <input type="text" name="role" value="4" hidden>
+                            <input type="text" name="password" value="123456" hidden>
                         </div>
                     </div>
                     <input type="submit" value="TẠO MỚI" name="submit" class="submit">

@@ -26,6 +26,7 @@
                         <div style="width: 45%;">
                             <p>Giới tính: {{ $detail->gender == 1 ? 'Nam' : 'Nữ' }}</p>
                             <p>Địa chỉ: {{ $detail->address }}</p>
+                            <p>Địa chỉ: {{ $detail->workplace }}</p>
                             <p>Email: {{ $detail->email }}</p>
                             <label for="id_num"></label><br>
                         </div>
