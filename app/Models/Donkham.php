@@ -24,6 +24,7 @@ class Donkham extends Model
     'Hemoglobine',
     'ViemGanB', 
     'TrangThai',
+    'id_phieudangky',
     'created_at',
     'updated_at'
 ];

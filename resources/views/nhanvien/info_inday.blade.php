@@ -20,6 +20,13 @@
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form>
         <br><br>
+        <form action="" style="font-size: x-large;">
+            <label for="">Lịch hiến máu theo ngày: </label>
+            <input type="date" name="day"
+                style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+            <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+        </form>
+        <br><br>
         <form action="{{ route('emp.info_inday') }}" method="GET">
             <label for="order_by">Sắp xếp theo:</label>
             <select name="order_by" id="order_by" onchange="this.form.submit()"

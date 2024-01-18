@@ -23,6 +23,13 @@
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form>
         <br><br>
+        <form action="" style="font-size: x-large;">
+            <label for="">Lịch hiến máu theo ngày: </label>
+            <input type="date" name="day"
+                style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+            <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+        </form>
+        <br><br>
         <form action="{{ route('org.homsau', ['ngayHienTai' => \Carbon\Carbon::parse($ngayHienTai)->toDateString()]) }}"
             method="GET">
             <label for="order_by">Sắp xếp theo:</label>
@@ -79,7 +86,12 @@
                             <a href="{{ route('org.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                     nhật</button></a>
                             <a href="#"><button class="delete-btn">Xóa</button></a>
-                            <button class="update-btn">Chứng nhận</button>
+                            @if ($cl->TrangThai == 1)
+                                <button class="view-btn-2" disabled>Đã cấp</button>
+                            @else
+                                <a href="{{ route('org.create_certificate', $cl->id) }}"><button class="update-btn">Cấp
+                                        chứng nhận</button></a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

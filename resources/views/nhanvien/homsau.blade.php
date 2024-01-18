@@ -23,6 +23,13 @@
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form>
         <br><br>
+        <form action="" style="font-size: x-large;">
+            <label for="">Lịch hiến máu theo ngày: </label>
+            <input type="date" name="day"
+                style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+            <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+        </form>
+        <br><br>
         <form action="{{ route('emp.homsau', ['ngayHienTai' => \Carbon\Carbon::parse($ngayHienTai)->toDateString()]) }}"
             method="GET">
             <label for="order_by">Sắp xếp theo:</label>
@@ -75,11 +82,10 @@
                         <td>{{ $cl->Ykienbacsi == 1 ? 'Được hiến' : 'Không được hiến' }}</td>
                         <td>{{ $cl->TrangThaiHien == 0 ? 'Chưa hiến' : 'Đã hiến' }}</td>
                         <td style=" display: flexbox; justify-content: space-around ;">
-                            <a href="{{ route('emp.clinic') }}"><button class="delete-btn">Đơn bệnh</button></a>
+                            <a href="{{ route('emp.clinic', $cl->id) }}"><button class="delete-btn">Đơn bệnh</button></a>
                             <a href="{{ route('emp.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                     nhật</button></a>
                             <a href="#"><button class="delete-btn">Xóa</button></a>
-                            <button class="update-btn">Chứng nhận</button>
                         </td>
                     </tr>
                 @endforeach

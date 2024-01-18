@@ -43,7 +43,7 @@
                             <label for="">Nơi cư trú</label><br>
                             <input type="text" name="address" value="{{ $customer->address }}"><br><br>
                             <label for="">Nơi công tác</label><br>
-                            <input type="text" name="workspace" value="{{ $customer->workspace }}"><br><br>
+                            <input type="text" name="workplace" value="{{ $customer->workplace }}"><br><br>
                             <label for="">Email</label><br>
                             <input type="email" name="email" value="{{ $customer->email }}"><br><br>
                         </div>

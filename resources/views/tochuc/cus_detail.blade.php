@@ -37,22 +37,17 @@
                 <div class="donator-reg-history">
                     <h1 style="text-align: center;">LỊCH SỬ CÁC LẦN ĐÃ HIẾU MÁU</h1>
                     <div class="donate-reg-history-content">
-
-                        {{-- @if (($detail->NgayHien = null) and ($detail->LuongMau = null))
-                            <p>{{ $detail->name }} chưa hiến máu lần nào!</p>
+                        @if ($count < 1)
+                            <p>Không có lịch sử hiến máu</p>
                         @else
-                            @foreach ($detail as $dt)
-                                <p>Lần
-                                    {{ $stt++ }}:
-                                </p>
-                                <p>Lượng máu:
-                                    {{ $dt->LuongMau }} ml
-                                </p>
-                                <p>Ngày hiến máu:
-                                    {{ $dt->NgayHien }}
-                                </p>
-                            @endforeach
-                        @endif --}}
+                            <p>Lượng máu: {{ $detail->LuongMau }}</p>
+                            <p>Ngày hiến: {{ $detail->NgayHien }}</p>
+                            {{-- @for ($i = 1; $i <= 2; $i++)
+                                <p>Lần {{ $i }}:</p>
+                                <p>Lượng máu: {{ $detail[$i]->Luongmau }}</p>
+                                <p>Ngày hiến: {{ $detail[$i]->NgayHien }}</p>
+                            @endfor --}}
+                        @endif
                     </div>
                 </div>
                 <div style="width: 0%;"></div>

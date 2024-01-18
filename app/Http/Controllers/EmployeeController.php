@@ -145,8 +145,12 @@ class EmployeeController extends Controller
             $client = DB::table('vwindaynew')->select('vwindaynew.*')
             -> where('name','LIKE', '%'.$key.'%')->get();
         }
+        if($day = request()->day){
+            $client = DB::table('vwindaynew')->select('vwindaynew.*')
+            -> where('NgayHien', $day)->get();
+        }
                                                                                                                                                                                                                                                                            
-        return view('nhanvien.info_inday', compact('client','orderBy', 'ngayHienTai', 'key'));
+        return view('nhanvien.info_inday', compact('client','orderBy', 'ngayHienTai', 'key', 'day'));
     }
 
     public function ngayHomTruoc(Request $request, $ngayHienTai = null)
@@ -158,11 +162,15 @@ class EmployeeController extends Controller
             $lichSuHomTruoc = DB::table('vwindaynew')->select('vwindaynew.*')
             -> where('name','LIKE', '%'.$key.'%')->get();
         }
+        if($day = request()->day){
+            $client = DB::table('vwindaynew')->select('vwindaynew.*')
+            -> where('NgayHien', $day)->get();
+        }
 
         // Lấy lịch sử hiến máu ngày hôm trước
         $ngayHomTruoc = Carbon::parse($ngayHienTai)->subDay()->toDateString();
         $lichSuHomTruoc = $this->getSortedClients($orderBy, $ngayHomTruoc);
-        return view('nhanvien.homtruoc', compact('orderBy', 'lichSuHomTruoc', 'key', 'ngayHomTruoc', 'ngayHienTai'));
+        return view('nhanvien.homtruoc', compact('orderBy', 'lichSuHomTruoc', 'key', 'ngayHomTruoc', 'ngayHienTai', 'day'));
     }
     
     public function ngayHomSau(Request $request, $ngayHienTai = null)
@@ -175,10 +183,14 @@ class EmployeeController extends Controller
             $lichSuHomSau = DB::table('vwindaynew')->select('vwindaynew.*')
             -> where('name','LIKE', '%'.$key.'%')->get();
         }
+        if($day = request()->day){
+            $client = DB::table('vwindaynew')->select('vwindaynew.*')
+            -> where('NgayHien', $day)->get();
+        }
         // Lấy lịch sử hiến máu ngày hôm sau
         $ngayHomSau = Carbon::parse($ngayHienTai)->addDay()->toDateString();
         $lichSuHomSau = $this->getSortedClients($orderBy, $ngayHomSau);
-        return view('nhanvien.homsau', compact('orderBy', 'lichSuHomSau', 'key', 'ngayHomSau', 'ngayHienTai'));
+        return view('nhanvien.homsau', compact('orderBy', 'lichSuHomSau', 'key', 'ngayHomSau', 'ngayHienTai', 'day'));
     }
 
     private function getSortedClients($orderBy, $ngayHienTai){

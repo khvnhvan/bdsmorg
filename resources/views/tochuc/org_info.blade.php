@@ -19,7 +19,7 @@
         </form> <br>
         <form action="" style="font-size: x-large;" method="GET">
             <label for="">Tìm kiếm theo tên: </label>
-            <input name="key" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+            <input name="name" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form> <br>
         <a href="{{ route('org.create_emp') }}"><button class="update-btn">Thêm mới</button></a><br> <br>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Giaychungnhan;
 use App\Models\User;
 use App\Models\Phieudangky;
 use Carbon\Carbon;
@@ -144,8 +145,12 @@ class OrganizerController extends Controller
             $client = DB::table('vwindaynew')->select('vwindaynew.*')
             -> where('name','LIKE', '%'.$key.'%')->get();
         }
-                                                                                                                                                                                                                                                                           
-        return view('tochuc.info_inday', compact('client','orderBy', 'ngayHienTai', 'key'));
+
+        if($day = request()->day){
+            $client = DB::table('vwindaynew')->select('vwindaynew.*')
+            -> where('NgayHien', $day)->get();
+        }                                                                                                                                                                                                                                                                   
+        return view('tochuc.info_inday', compact('client','orderBy', 'ngayHienTai', 'key', 'day'));
     }
 
     public function ngayHomTruoc(Request $request, $ngayHienTai = null)
@@ -157,11 +162,15 @@ class OrganizerController extends Controller
             $lichSuHomTruoc = DB::table('vwindaynew')->select('vwindaynew.*')
             -> where('name','LIKE', '%'.$key.'%')->get();
         }
+        if($day = request()->day){
+            $client = DB::table('vwindaynew')->select('vwindaynew.*')
+            -> where('NgayHien', $day)->get();
+        } 
 
         // Lấy lịch sử hiến máu ngày hôm trước
         $ngayHomTruoc = Carbon::parse($ngayHienTai)->subDay()->toDateString();
         $lichSuHomTruoc = $this->getSortedClients($orderBy, $ngayHomTruoc);
-        return view('tochuc.homtruoc', compact('orderBy', 'lichSuHomTruoc', 'key', 'ngayHomTruoc', 'ngayHienTai'));
+        return view('tochuc.homtruoc', compact('orderBy', 'lichSuHomTruoc', 'key', 'ngayHomTruoc', 'ngayHienTai', 'day'));
     }
     
     public function ngayHomSau(Request $request, $ngayHienTai = null)
@@ -177,7 +186,7 @@ class OrganizerController extends Controller
         // Lấy lịch sử hiến máu ngày hôm sau
         $ngayHomSau = Carbon::parse($ngayHienTai)->addDay()->toDateString();
         $lichSuHomSau = $this->getSortedClients($orderBy, $ngayHomSau);
-        return view('tochuc.homsau', compact('orderBy', 'lichSuHomSau', 'key', 'ngayHomSau', 'ngayHienTai'));
+        return view('tochuc.homsau', compact('orderBy', 'lichSuHomSau', 'key', 'ngayHomSau', 'ngayHienTai', 'day'));
     }
 
     private function getSortedClients($orderBy, $ngayHienTai){
@@ -238,8 +247,15 @@ class OrganizerController extends Controller
 
     public function cus_detail(Request $request, $id){
         $stt = 1;
+        $i = 1;
         $detail = DB::table('vwhistorydonateblood')->select('vwhistorydonateblood.*')->where('id', $id)->first();
-        return view('tochuc.cus_detail', compact('detail','stt'));
+        $count = DB::table('vwhistorydonateblood')->select('vwhistorydonateblood.*')->where('id', $id)->count();
+        // $don = DB::table('donkham')->select('donkham.*')
+        // ->join('phieudangky', 'phieudangky.id', '=', 'donkham.id_phieudangky')
+        // ->join('lichhienmau', 'lichhienmau.id', '=', 'phieudangky.id_lich')
+        // ->where('lichhienmau.NgayHien', $ngayHomSau)
+        // ->count();
+        return view('tochuc.cus_detail', compact('detail','stt', 'count', 'i'));
     }
 
     public function create_cus(){
@@ -290,9 +306,9 @@ class OrganizerController extends Controller
                 -> where('id', $key)
                 -> get();
         } 
-        if($key = request()->key){
+        if($name = request()->name){
             $employee = DB::table('vwemp')
-            -> where('name','like','%'.$key.'%')
+            -> where('name','like','%'.$name.'%')
                 -> get();
         } 
         return view('tochuc.org_info', compact('employee'));
@@ -399,7 +415,16 @@ class OrganizerController extends Controller
         return view('tochuc.dropshipping', compact('cungung'));
     }
 
-    
+    public function create_certificate($id, Request $request){
+        $info = DB::table('vwindaynew')->select('vwindaynew.*')->where('id',$id)->get();
+        return view('tochuc.certificate', compact('info'));
+    }
+
+    public function certificate(Request $request){
+        $data = request()->all('id', 'MaDK','NgayCap', 'TrangThai');
+        Giaychungnhan::create($data);
+        return redirect()->route('org.info_inday');
+    }
 
     public function logout(){
         Auth::logout();

@@ -47,6 +47,9 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
     Route::put('/update_appt/{id}', [CalendarController::class, 'update_appt_check'])->name('org.update_appt_check');
     Route::delete('/delete_appt/{id}', [CalendarController::class, 'delete_appt'])->name('org.delete_appt');
 
+    Route::get('/certificate/{id}', [OrganizerController::class, 'create_certificate'])->name('org.create_certificate');
+    Route::post('/certificate/{id}', [OrganizerController::class, 'certificate'])->name('org.certificate');
+
     Route::get('/dropshipping', [OrganizerController::class, 'dropshipping'])->name('org.dropshipping');
 
 });
@@ -103,14 +106,13 @@ Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
     Route::get('/cus_detail/{id}', [DoctorController::class, 'cus_detail'])->name('doc.cus_detail');
     Route::get('/appt_schedule', [DoctorController::class, 'appt_schedule'])->name('doc.appt_schedule');
     Route::get('/donate-history/{ngayHienTai}/hom-truoc', [DoctorController::class, 'ngayHomTruoc'])->name('doc.homtruoc');
-    Route::get('/donate-history/{ngayHienTai}/hom-sau', [DoctorController::class, 'ngayHomSau'])->name('doc.homsau');
+    Route::get('/donate-history/{ngayHienTai}/hom-sau', [DoctorController::     class, 'ngayHomSau'])->name('doc.homsau');
     Route::get('/update_cus/{id}', [DoctorController::class, 'update_cus'])->name('doc.update_cus');
     Route::put('/update_cus/{id}', [DoctorController::class, 'update_cus_check'])->name('doc.update_cus_check');
     Route::get('/clinic/{id}', [DoctorController::class, 'clinic'])->name('doc.clinic');
-    Route::post('/clinic/{id}', [DoctorController::class, 'store_clinic'])->name('doc.store_clinic');
-    Route::get('/clinic/today/{id}', [DoctorController::class, 'check_clinic_homnay'])->name('doc.check_clinic_homnay');
-    Route::get('/clinic/lastday/{id}', [DoctorController::class, 'check_clinic_homtruoc'])->name('doc.check_clinic_homtruoc');
-    Route::get('/clinic/tmr/{id}', [DoctorController::class, 'check_clinic_homsau'])->name('doc.check_clinic_homsau');
+    Route::get('/clinic/create/{id}', [DoctorController::class, 'create_clinic'])->name('doc.create_clinic');
+    Route::post('/clinic/create/{id}', [DoctorController::class, 'store_clinic'])->name('doc.store_clinic');
+    Route::get('/check/clinic/homtruoc/{user_id}', [DoctorController::class, 'check_clinic_homtruoc'])->name('doc.check_clinic_homtruoc');
 });
 
 

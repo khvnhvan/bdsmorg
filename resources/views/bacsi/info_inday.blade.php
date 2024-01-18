@@ -20,6 +20,13 @@
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form>
         <br><br>
+        <form action="" style="font-size: x-large;">
+            <label for="">Lịch hiến máu theo ngày: </label>
+            <input type="date" name="day"
+                style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+            <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
+        </form>
+        <br><br>
         <form action="{{ route('doc.info_inday') }}" method="GET">
             <label for="order_by">Sắp xếp theo:</label>
             <select name="order_by" id="order_by" onchange="this.form.submit()"
@@ -70,8 +77,14 @@
                     <td style=" display: flexbox; justify-content: space-around ;">
                         <a href="{{ route('doc.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                 nhật</button></a>
-                        <a href="{{ route('doc.check_clinic_homnay', $cl->user_id) }}"><button class="update-btn">Khám sàng
-                                lọc</button></a>
+                        @if ($don < 1)
+                            <a href="{{ route('doc.create_clinic', $cl->user_id) }}"><button class="update-btn">Khám
+                                    sàng
+                                    lọc</button></a>
+                        @else
+                            <a href="{{ route('doc.clinic', $cl->user_id) }}"><button class="update-btn">Đơn
+                                    khám</button></a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
