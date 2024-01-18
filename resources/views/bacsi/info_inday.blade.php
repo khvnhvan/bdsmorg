@@ -82,7 +82,7 @@
                                     sàng
                                     lọc</button></a>
                         @else
-                            <a href="{{ route('doc.clinic', $cl->user_id) }}"><button class="update-btn">Đơn
+                            <a href="{{ route('doc.check_clinic_homnay', $cl->user_id) }}"><button class="update-btn">Đơn
                                     khám</button></a>
                         @endif
                     </td>

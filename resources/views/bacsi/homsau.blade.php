@@ -84,13 +84,6 @@
                         <td style=" display: flexbox; justify-content: space-around ;">
                             <a href="{{ route('doc.update_infoinday', $cl->id) }}"><button class="view-btn-2">Cập
                                     nhật</button></a>
-                            @if ($don < 1)
-                                <a href="{{ route('doc.create_clinic', $cl->user_id) }}"><button class="update-btn">Khám
-                                        sàng
-                                        lọc</button></a>
-                            @else
-                                <a href="{{ route('doc.clinic', $cl->user_id) }}"><button class="update-btn">Đơn khám</button></a>
-                            @endif
 
                         </td>
                     </tr>

@@ -51,6 +51,8 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
     Route::post('/certificate/{id}', [OrganizerController::class, 'certificate'])->name('org.certificate');
 
     Route::get('/dropshipping', [OrganizerController::class, 'dropshipping'])->name('org.dropshipping');
+    Route::get('/create_dropshipping', [OrganizerController::class, 'create_dropshipping'])->name('org.create_dropshipping');
+    Route::post('/create_dropshipping', [OrganizerController::class, 'store_dropshipping'])->name('org.store_dropshipping');
 
 });
 
@@ -113,6 +115,7 @@ Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
     Route::get('/clinic/create/{id}', [DoctorController::class, 'create_clinic'])->name('doc.create_clinic');
     Route::post('/clinic/create/{id}', [DoctorController::class, 'store_clinic'])->name('doc.store_clinic');
     Route::get('/check/clinic/homtruoc/{user_id}', [DoctorController::class, 'check_clinic_homtruoc'])->name('doc.check_clinic_homtruoc');
+    Route::get('/check/clinic/homnay/{user_id}', [DoctorController::class, 'check_clinic_homnay'])->name('doc.check_clinic_homnay');
 });
 
 

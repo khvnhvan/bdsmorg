@@ -159,6 +159,28 @@ class DoctorController extends Controller
         return view('bacsi.info_inday', compact('client','orderBy', 'ngayHienTai', 'key', 'don', 'day'));
     }
 
+    public function check_clinic_homnay($user_id) {
+        $ngayHomNay = date('Y-m-d');
+        $id = request()->user_id;
+        $count = DB::table('donkham')
+        ->select('donkham.NhietDo')
+        ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
+        ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
+        ->where([
+            ['NgayHien', '=',$ngayHomNay],
+            ['donkham.user_id', $user_id],
+        ])
+        ->orderByDesc('donkham.id')
+        ->limit(1)
+        ->count();
+
+        if($count > 0) {
+            return redirect()->route('doc.clinic', $user_id);
+        } else {
+            return redirect()->route('doc.create_clinic', $user_id);
+        }
+    }
+
     public function update_cus(string $id){
         $blood = DB::table('nhommau')->get();
         $customer = DB::table('users')->find($id);
@@ -170,38 +192,6 @@ class DoctorController extends Controller
         $customer->update($request->all());
         return redirect()->route('doc.cus_info')->with('update','Cập nhật người hiến thành công!');
     }
-
-    // public function check_clinic_homtruoc(Request $request, $ngayHienTai = null) {
-    //     $ngayHienTai = date('20y-m-d');
-    //     $ngayHomTruoc = Carbon::parse($ngayHienTai)->subDay()->toDateString();
-
-    //     $id = request()->user_id;
-    //     $count = DB::table('donkham')
-    //     ->select('donkham.NhietDo')
-    //     ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
-    //     ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
-    //     ->where('NgayHien', '=',$ngayHomTruoc, 'and', 'user_id', $id)
-    //     ->orderByDesc('donkham.id')
-    //     ->limit(1)
-    //     ->count(); 
-        
-    //     $phieudangky = DB::table('donkham')
-    //     ->select('phieudangky.id')
-    //     ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
-    //     ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
-    //     ->where('NgayHien', '=', $ngayHomTruoc, 'and', 'user_id', $id)
-    //     ->orderByDesc('donkham.id')
-    //     ->limit(1)
-    //     ->get();
-
-    //     // dd);
-    //     if($count < 1) {
-    //         return redirect()->route('doc.clinic', $phieudangky[0]->id);
-    //     } else {
-    //         return redirect()->route('doc.cus_info');
-    //     }
-
-    // }
 
     public function ngayHomTruoc(Request $request, $ngayHienTai = null)
     {
@@ -220,12 +210,7 @@ class DoctorController extends Controller
         // Lấy lịch sử hiến máu ngày hôm trước
         $ngayHomTruoc = Carbon::parse($ngayHienTai)->subDay()->toDateString();
         $lichSuHomTruoc = $this->getSortedClients($orderBy, $ngayHomTruoc);
-        // $don = DB::table('donkham')->select('donkham.*')
-        // ->join('phieudangky', 'phieudangky.id', '=', 'donkham.id_phieudangky')
-        // ->join('lichhienmau', 'lichhienmau.id', '=', 'phieudangky.id_lich')
-        // ->where('lichhienmau.NgayHien', $ngayHomTruoc)
-        // ->count();
-    
+
         return view('bacsi.homtruoc', compact('orderBy', 'lichSuHomTruoc', 'key', 'ngayHomTruoc', 'ngayHienTai', 'day'));
     }
     
@@ -243,20 +228,6 @@ class DoctorController extends Controller
         ->orderByDesc('donkham.id')
         ->limit(1)
         ->count();
-
-        // $phieudangky = DB::table('donkham')
-        // ->select('phieudangky.user_id')
-        // ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
-        // ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
-        // ->where([
-        //     ['NgayHien', '=',$ngayHomTruoc],
-        //     ['donkham.user_id', $user_id],
-        // ])
-        // ->orderByDesc('donkham.id')
-        // ->limit(1)
-        // ->get();
-
-        // dd($phieudangky);
 
         if($count > 0) {
             return redirect()->route('doc.clinic', $user_id);
@@ -290,37 +261,6 @@ class DoctorController extends Controller
 
         return view('bacsi.homsau', compact('orderBy', 'lichSuHomSau', 'key', 'ngayHomSau', 'ngayHienTai', 'don', 'day'));
     }
-
-    // public function check_clinic_homnay($user_id) {
-    //     $ngayHienTai = date('20y-m-d');
-
-    //     $id = request()->user_id;
-    //     $count = DB::table('donkham')
-    //     ->select('donkham.NhietDo')
-    //     ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
-    //     ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
-    //     ->where('NgayHien', '=',$ngayHienTai, 'and', 'user_id', $id)
-    //     ->orderByDesc('donkham.id')
-    //     ->limit(1)
-    //     ->count(); 
-        
-    //     $phieudangky = DB::table('donkham')
-    //     ->select('phieudangky.id')
-    //     ->join('phieudangky', 'phieudangky.id',  '=', 'donkham.id_phieudangky')
-    //     ->join('lichhienmau', 'phieudangky.id_lich', '=', 'lichhienmau.id')
-    //     ->where('NgayHien', '=', $ngayHienTai, 'and', 'user_id', $id)
-    //     ->orderByDesc('donkham.id')
-    //     ->limit(1)
-    //     ->get();
-
-    //     // dd);
-    //     if($count < 1) {
-    //         return redirect()->route('doc.clinic', $phieudangky[0]->id);
-    //     } else {
-    //         return redirect()->route('doc.cus_info');
-    //     }
-
-    // }
 
     private function getSortedClients($orderBy, $ngayHienTai){
         switch($orderBy){

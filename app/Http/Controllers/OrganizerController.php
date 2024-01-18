@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Giaychungnhan;
+use App\Models\Phieucungung;
 use App\Models\User;
 use App\Models\Phieudangky;
 use Carbon\Carbon;
@@ -407,12 +408,156 @@ class OrganizerController extends Controller
         return redirect()->route('org.clinic', $clinic[0]->MaCauTL); 
     }
 
-    public function dropshipping(){
-        $cungung = DB::table('cungungmau')->select('cungungmau.*', 'benhvien.TenVien', 'benhvien.id', 'nhommau.NhomMau')
-        ->join('nhommau', 'nhommau.MaMau', '=', 'cungungmau.MaMau')
-        ->join('benhvien', 'benhvien.id', '=', 'cungungmau.id_vien')
-        ->get();
-        return view('tochuc.dropshipping', compact('cungung'));
+    public function dropshipping(Request $request){
+        $orderBy = $request->input('order_by','name');
+        $cungung = $this->getSortedSupply($orderBy);
+        if($key = request()->key){
+            $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('vwcungung.TenVien', 'like', '%'.$key.'%')->get();
+        }
+        if($date = request()->date){
+            $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('vwcungung.NgayCungUng', $date)->get();
+        }
+        return view('tochuc.dropshipping', compact('cungung', 'orderBy', 'key', 'date'));
+    }
+
+    private function getSortedSupply($orderBy){
+        switch($orderBy){
+            case 'name': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->orderBy('name', 'desc')->get();
+                break;
+            case 'A_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'A+')->get();
+                break;
+            case 'B_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'B+')->get();
+                break;
+            case 'O_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'O+')->get();
+                break;
+            case 'AB_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'AB+')->get();
+                break;
+            case 'A_minus_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'A-')->get();
+                break;
+            case 'B_minus_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'B-')->get();
+                break;
+            case 'O_minus_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'O-')->get();
+                break;
+            case 'AB_minus_type': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('NhomMau','=', 'AB-')->get();
+                break;
+            case 'donated': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('TrangThai', '=', '1')->get();
+                break;
+            case 'notyet': 
+                $cungung = DB::table('vwcungung')->select('vwcungung.*')->where('TrangThai', '=', '0')->get();
+                break;
+            }
+        return $cungung;
+    }
+
+    public function create_dropshipping(){
+        $vien = DB::table('benhvien')->select('benhvien.*')->get();
+        $blood = DB::table('nhommau')->select('nhommau.*')->where('nhommau.MaMau', '>', 0)->get();
+        $Aminus = DB::table('vwtongmauaminus')->value('TongmauAminus');
+        $Bminus = DB::table('vwtongmaubminus')->value('TongmauBminus');
+        $Ominus = DB::table('vwtongmauominus')->value('TongmauOminus');
+        $ABminus = DB::table('vwtongmauabminus')->value('TongmauABminus');
+        $Aplus = DB::table('vwtongmauaplus')->value('TongmauAplus');
+        $Bplus = DB::table('vwtongmaubplus')->value('TongmauBplus');
+        $Oplus = DB::table('vwtongmauoplus')->value('TongmauOplus');
+        $ABplus = DB::table('vwtongmauabplus')->value('TongmauABplus');
+        return view('tochuc.create_dropshipping', compact('vien', 'blood', 'Aminus','Bminus','Ominus'
+    ,'ABminus','Aplus','Bplus','Oplus','ABplus'));
+        
+    }
+
+    public function store_dropshipping(Request $request) {
+        $data = request()->all('id_vien', 'id_emp', 'NgayCungUng', 'TrangThai', 'LuongMau', 'MaMau');
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 1,
+                'LuongMau' => $request->LuongMau1,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 2,
+                'LuongMau' => $request->LuongMau2,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 3,
+                'LuongMau' => $request->LuongMau3,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 4,
+                'LuongMau' => $request->LuongMau4,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 5,
+                'LuongMau' => $request->LuongMau5,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 6,
+                'LuongMau' => $request->LuongMau6,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 7,
+                'LuongMau' => $request->LuongMau7,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        Phieucungung::create(
+            [
+                'id_vien' => $request->id_vien,
+                'id_emp' => $request->id_emp,
+                'MaMau' => 8,
+                'LuongMau' => $request->LuongMau8,
+                'NgayCungUng' => $request->NgayCungUng,
+                'TrangThai' => $request->TrangThai,
+            ]
+        );
+        return redirect()->route('org.dropshipping');
     }
 
     public function create_certificate($id, Request $request){
@@ -420,7 +565,7 @@ class OrganizerController extends Controller
         return view('tochuc.certificate', compact('info'));
     }
 
-    public function certificate(Request $request){
+    public function certificate(){
         $data = request()->all('id', 'MaDK','NgayCap', 'TrangThai');
         Giaychungnhan::create($data);
         return redirect()->route('org.info_inday');
