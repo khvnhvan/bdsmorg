@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class OrganizerController extends Controller
 {
@@ -445,12 +446,32 @@ class OrganizerController extends Controller
             }
         }
 
-        dd($dropshippingSum);
-
         return view('tochuc.dropshipping', compact('vien', 'i', 'dropshippingSum', 'v'));
     }
 
-    // public function detail_dropshipping()
+    public function detail_dropshipping($id) {
+        $cum = DB::table('cungungmau')
+        ->select('cungungmau.*', 'nhommau.NhomMau')
+        ->join('nhommau', 'nhommau.MaMau', '=', 'cungungmau.MaMau')
+        ->where('cungungmau.id_vien', $id)
+        ->orderByRaw('cungungmau.id')
+        ->get();
+        // dd($cum);
+        $count = DB::table('cungungmau')
+        ->select('cungungmau.MaMau')
+        ->where([
+            ['cungungmau.id_vien', $id],
+            ['cungungmau.MaMau', 1],
+        ])
+        ->count();
+        
+        $vien = DB::table('benhvien')
+        ->select('benhvien.TenVien', 'benhvien.DiaChi')
+        ->where('benhvien.id', $id)
+        ->get();
+
+        return view('tochuc.dropshipping_detail', compact('cum', 'vien', 'count'));
+    }
 
     private function getSortedSupply($orderBy){
         switch($orderBy){

@@ -2,7 +2,7 @@
 @section('orgmain')
     <div class="dashboard-container">
         <div class="dashboard-title">
-            <h1 class="donator-info-title-1">LỊCH SỬ <br>CUNG ỨNG MÁU</h1>
+            <h1 class="donator-info-title-1">CUNG ỨNG MÁU</h1>
             <h1 style="text-align: right;">THE BDSM <br>PROJECT</h1>
         </div>
         <br><br>
@@ -20,7 +20,6 @@
             <input type="submit" style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
         </form>
         <br><br>
-        <p>Thông tin nhìn hơi bừa, để t tạo thêm 1 view xem chi tiết, nhìn cho nó dễ</p>
         {{-- <form action="{{ route('org.dropshipping') }}" method="GET">
             <label for="order_by">Sắp xếp theo:</label>
             <select name="order_by" id="order_by" onchange="this.form.submit()"
@@ -76,7 +75,8 @@
                 </td>
                 <?php } ?>
                 <td>
-                    <a href=""><button class="update-btn">Chi tiết</button></a>
+                    <a href="{{ route('org.detail_dropshipping', $vien[$j]->id) }}"><button class="update-btn">Chi
+                            tiết</button></a>
                 </td>
             </tr>
             <?php } ?>

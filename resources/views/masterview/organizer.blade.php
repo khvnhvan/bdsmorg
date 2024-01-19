@@ -21,6 +21,7 @@
         <li><a href="{{ route('org.info_inday') }}">THÔNG TIN NGƯỜI HIẾN MÁU TRONG NGÀY</a></li>
         <li><a href="{{ route('org.create_appt') }}">TẠO LỊCH</a></li>
         <li><a href="{{ route('org.apt_schedule') }}">CHỈNH LỊCH</a></li>
+        <li><a href="{{ route('org.dropshipping') }}">CUNG ỨNG MÁU</a></li>
         <li><a href="{{ route('org.logout') }}">ĐĂNG XUẤT</a></li>
     </ul>
 
