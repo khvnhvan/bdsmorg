@@ -53,7 +53,7 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
     Route::get('/dropshipping', [OrganizerController::class, 'dropshipping'])->name('org.dropshipping');
     Route::get('/create_dropshipping', [OrganizerController::class, 'create_dropshipping'])->name('org.create_dropshipping');
     Route::post('/create_dropshipping', [OrganizerController::class, 'store_dropshipping'])->name('org.store_dropshipping');
-
+    Route::get('/dropshipping/detail/{id_vien}', [OrganizerController::class, 'detail_dropshipping'])->name('org.detail_dropshipping');
 });
 
 

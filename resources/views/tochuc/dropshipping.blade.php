@@ -21,7 +21,7 @@
         </form>
         <br><br>
         <p>Thông tin nhìn hơi bừa, để t tạo thêm 1 view xem chi tiết, nhìn cho nó dễ</p>
-        <form action="{{ route('org.dropshipping') }}" method="GET">
+        {{-- <form action="{{ route('org.dropshipping') }}" method="GET">
             <label for="order_by">Sắp xếp theo:</label>
             <select name="order_by" id="order_by" onchange="this.form.submit()"
                 style="font-size: x-large; font-family: 'Josefin Sans', sans-serif; padding: 0.5%;">
@@ -37,7 +37,7 @@
                 <option value="donated" {{ $orderBy == 'donated' ? 'selected' : '' }}>Đã nhận</option>
                 <option value="notyet" {{ $orderBy == 'notyet' ? 'selected' : '' }}>Chưa nhận</option>
             </select>
-        </form> <br> <br>
+        </form> <br> <br> --}}
         {{-- @if (Session::has('success'))
             <p style="color: red">{{ Session::get('success') }}</p>
         @endif
@@ -47,16 +47,45 @@
         <br><br> --}}
         <table border="2" style="background-color: #F7E9E8;">
             <tr>
-                <th>Mã bệnh viện</th>
-                <th>Tên</th>
-                <th>Nhóm máu</th>
-                <th>Lượng máu</th>
-                <th>Ngày cung ứng</th>
-                <th>Nhân viên cung ứng</th>
-                <th>Trạng thái</th>
+                <th>Tên Bệnh viện / Nhóm máu</th>
+                <th>A-</th>
+                <th>B-</th>
+                <th>O-</th>
+                <th>AB-</th>
+                <th>A+</th>
+                <th>B+</th>
+                <th>O+</th>
+                <th>AB+</th>
                 <th>Hành động</th>
             </tr>
-            @foreach ($cungung as $cung)
+            <?php for ($j = 0; $j < $i; $j++) { 
+            ?>
+            <tr>
+                <td>
+                    <?php
+                    print $vien[$j]->TenVien;
+                    ?>
+                </td>
+                <?php for($k = 1; $k < 9; $k++) { ?>
+                <td>
+                    <?php
+                    $q = $k - 1 + 8 * $j;
+                    print $dropshippingSum[$q];
+                    $v = $j + 1;
+                    ?>
+                </td>
+                <?php } ?>
+                <td>
+                    <a href=""><button class="update-btn">Chi tiết</button></a>
+                </td>
+            </tr>
+            <?php } ?>
+        </table> <br><br>
+    </div>
+@stop()
+
+
+{{-- @foreach ($cungung as $cung)
                 <tr>
                     <td>{{ $cung->id_vien }}</td>
                     <td>{{ $cung->TenVien }}</td>
@@ -70,7 +99,4 @@
                         <a href=""><button class="delete-btn">Xóa</button></a>
                     </td>
                 </tr>
-            @endforeach
-        </table> <br><br>
-    </div>
-@stop()
+            @endforeach --}}
