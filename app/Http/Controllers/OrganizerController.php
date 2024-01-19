@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrganizerController extends Controller
 {
@@ -476,87 +477,323 @@ class OrganizerController extends Controller
     }
 
     public function store_dropshipping(Request $request) {
-        $data = request()->all('id_vien', 'id_emp', 'NgayCungUng', 'TrangThai', 'LuongMau', 'MaMau');
-        Phieucungung::create(
-            [
+        DB::beginTransaction();
+
+        //nhóm máu A-
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            // DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
                 'MaMau' => 1,
-                'LuongMau' => $request->LuongMau1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),  
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+
+        //nhóm máu B-
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauBMinus = DB::table('vwtongmaubminus')->value('vwtongmaubminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 2)->increment('LuongMau', $tongMauBMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 2,
-                'LuongMau' => $request->LuongMau2,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 3,
-                'LuongMau' => $request->LuongMau3,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 4,
-                'LuongMau' => $request->LuongMau4,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 5,
-                'LuongMau' => $request->LuongMau5,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 6,
-                'LuongMau' => $request->LuongMau6,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 7,
-                'LuongMau' => $request->LuongMau7,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
-        Phieucungung::create(
-            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        try {
+            // Lấy giá trị từ cột tongmauadminus của bảng mauabminus
+            $tongMauAMinus = DB::table('vwtongmauaminus')->value('vwtongmauaminus');
+
+            // Cộng giá trị vào cột lượng_mau của bảng cung_ứng
+            DB::table('cungungmau')->where('MaMau', 1)->increment('LuongMau', $tongMauAMinus);
+
+            // Thêm dữ liệu mới vào bảng khác (ví dụ, bảng log)
+            DB::table('cungungmau')->insert([
                 'id_vien' => $request->id_vien,
                 'id_emp' => $request->id_emp,
-                'MaMau' => 8,
-                'LuongMau' => $request->LuongMau8,
+                'MaMau' => 1,
+                'LuongMau' => $tongMauAMinus,
                 'NgayCungUng' => $request->NgayCungUng,
                 'TrangThai' => $request->TrangThai,
-            ]
-        );
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Xóa giá trị đã chuyển từ cột tongmauadminus của bảng mauabminus (nếu cần)
+            DB::table('vwtongmauaminus')->decrement('TongMauAminus', $tongMauAMinus);
+
+            // Commit transaction nếu mọi thứ diễn ra đúng
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi, rollback transaction và ghi log
+            DB::rollback();
+            Log::error('Error transferring blood amounts and inserting data: ' . $e->getMessage());
+        }
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 1,
+        //         'LuongMau' => $request->LuongMau1,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 2,
+        //         'LuongMau' => $request->LuongMau2,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 3,
+        //         'LuongMau' => $request->LuongMau3,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 4,
+        //         'LuongMau' => $request->LuongMau4,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 5,
+        //         'LuongMau' => $request->LuongMau5,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 6,
+        //         'LuongMau' => $request->LuongMau6,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 7,
+        //         'LuongMau' => $request->LuongMau7,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
+        // Phieucungung::create(
+        //     [
+        //         'id_vien' => $request->id_vien,
+        //         'id_emp' => $request->id_emp,
+        //         'MaMau' => 8,
+        //         'LuongMau' => $request->LuongMau8,
+        //         'NgayCungUng' => $request->NgayCungUng,
+        //         'TrangThai' => $request->TrangThai,
+        //     ]
+        // );
         return redirect()->route('org.dropshipping');
     }
 
