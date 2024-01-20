@@ -36,27 +36,6 @@
 
             <div class="dashboard-div-2">
                 <div class="dashboard-div-6">
-                    <div class="dashboard-div-6-1">
-                        <p class="blood-type-o">O-</p>
-                        @if ($Ominus < 1000)
-                            <p style="color: red">
-                                {{ $Ominus }}
-                                / 2000ml <br><br>
-                                THIẾU MÁU TRẦM TRỌNG
-                            </p>
-                        @elseif ($Ominus < 2000)
-                            <p style="color: red">
-                                {{ $Ominus }}
-                                / 2000ml <br>
-                                CẢNH BÁO THIẾU MÁU
-                            </p>
-                        @else
-                            <p style="color: #668884">
-                                {{ $Ominus }}
-                                / 2000ml
-                            </p>
-                        @endif
-                    </div>
                     <div class="dashboard-div-6-2">
                         <div style="width: 50%; height: auto;">
                             <div class="dashboard-div-6-2-1">
@@ -133,9 +112,33 @@
                                 </div>
                                 <div style="width: 0%;"></div>
                             </div>
+                            <div class="dashboard-div-6-2-4">
+                                <div style="width: 100%;">
+                                    <p class="blood-type">O-</p>
+                                    @if ($Ominus < 1000)
+                                        <p style="color: red">
+                                            {{ $Ominus }}
+                                            / 2000ml <br><br>
+                                            THIẾU MÁU TRẦM TRỌNG
+                                        </p>
+                                    @elseif ($Ominus < 2000)
+                                        <p style="color: red">
+                                            {{ $Ominus }}
+                                            / 2000ml <br>
+                                            CẢNH BÁO THIẾU MÁU
+                                        </p>
+                                    @else
+                                        <p style="color: #668884">
+                                            {{ $Ominus }}
+                                            / 2000ml
+                                        </p>
+                                    @endif
+                                </div>
+                                <div style="width: 0%;"></div>
+                            </div>
                         </div>
                     </div> <br>
-                    <div class="dashboard-div-6-1">
+                    {{-- <div class="dashboard-div-6-1">
                         <p class="blood-type-o">O+</p>
                         @if ($Oplus < 1000)
                             <p style="color: red">
@@ -155,7 +158,7 @@
                                 / 2000ml
                             </p>
                         @endif
-                    </div>
+                    </div> --}}
                     <div class="dashboard-div-6-2">
                         <div style="width: 50%; height: auto;">
                             <div class="dashboard-div-6-2-1">
@@ -226,6 +229,30 @@
                                     @else
                                         <p style="color: #668884">
                                             {{ $ABplus }}
+                                            / 2000ml
+                                        </p>
+                                    @endif
+                                </div>
+                                <div style="width: 0%;"></div>
+                            </div>
+                            <div class="dashboard-div-6-2-4">
+                                <div style="width: 100%;">
+                                    <p class="blood-type">O+</p>
+                                    @if ($Oplus < 1000)
+                                        <p style="color: red">
+                                            {{ $Oplus }}
+                                            / 2000ml <br><br>
+                                            THIẾU MÁU TRẦM TRỌNG
+                                        </p>
+                                    @elseif ($Oplus < 2000)
+                                        <p style="color: red">
+                                            {{ $Oplus }}
+                                            / 2000ml <br>
+                                            CẢNH BÁO THIẾU MÁU
+                                        </p>
+                                    @else
+                                        <p style="color: #668884">
+                                            {{ $Oplus }}
                                             / 2000ml
                                         </p>
                                     @endif

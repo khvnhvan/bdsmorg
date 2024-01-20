@@ -16,7 +16,7 @@
         <div class="login-inside-container">
             <div class="login-inside-container-content">
                 <div style="width: 80%;">
-                    <h1 style="line-height: 120%;">ĐĂNG NHẬP VÀO <br>TRANG QUẢN LÝ CỦA TỔ CHỨC</h1>
+                    <h1 style="line-height: 120%;">ĐĂNG NHẬP VÀO <br>TRANG QUẢN LÝ CỦA NHÂN VIÊN</h1>
                     <form action="" method="POST" role="form">
                         @csrf
                         <label for="id_num">Mã số nhân viên:</label><br>
