@@ -5,8 +5,13 @@ use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\DropshippingController;
 
-Route::group(['prefix' => 'org'],function () {
+Route::get('/', function () {
+    return view('main');
+});
+
+Route::group(['prefix' => 'org'], function () {
     Route::get('/register', [OrganizerController::class, 'register'])->name('register');
     Route::post('/register', [OrganizerController::class, 'checkregister'])->name('checkregister');
     Route::get('/', [OrganizerController::class, 'login'])->name('org.login');
@@ -14,7 +19,7 @@ Route::group(['prefix' => 'org'],function () {
     Route::get('/logout', [OrganizerController::class, 'logout'])->name('org.logout');
 });
 
-Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
+Route::group(['prefix' => 'org', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('org.dashboard');
     Route::get('/org_info', [OrganizerController::class, 'orgInfo'])->name('org.org_info');
     Route::get('/cus_detail/{id}', [OrganizerController::class, 'cus_detail'])->name('org.cus_detail');
@@ -57,17 +62,14 @@ Route::group(['prefix' => 'org', 'middleware' => 'auth'],function () {
 });
 
 
-
-
-
-Route::group(['prefix' => 'emp'],function () {
+Route::group(['prefix' => 'emp'], function () {
     Route::get('/', [EmployeeController::class, 'login'])->name('emp.login');
     Route::post('/', [EmployeeController::class, 'checklogin'])->name('emp.checklogin');
     Route::get('/logout', [EmployeeController::class, 'logout'])->name('emp.logout');
 });
 
-Route::group(['prefix' => 'emp', 'middleware' => 'employee'],function () {
-    Route::get('/dashboard', [EmployeeController::class,'dashboard'])->name('emp.dashboard');
+Route::group(['prefix' => 'emp', 'middleware' => 'employee'], function () {
+    Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('emp.dashboard');
     Route::get('/emp_info', [EmployeeController::class, 'emp_info'])->name('emp.emp_info');
     Route::get('/update_emp/{id}', [EmployeeController::class, 'update_emp'])->name('emp.update_emp');
     Route::put('/update_emp/{id}', [EmployeeController::class, 'update_emp_check'])->name('emp.update_emp_check');
@@ -87,17 +89,14 @@ Route::group(['prefix' => 'emp', 'middleware' => 'employee'],function () {
 });
 
 
-
-
-
-Route::group(['prefix' => 'doc'],function () {
+Route::group(['prefix' => 'doc'], function () {
     Route::get('/', [DoctorController::class, 'login'])->name('doc.login');
     Route::post('/', [DoctorController::class, 'checklogin'])->name('doc.checklogin');
     Route::get('/logout', [DoctorController::class, 'logout'])->name('doc.logout');
 });
 
-Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
-    Route::get('/dashboard', [DoctorController::class,'dashboard'])->name('doc.dashboard');
+Route::group(['prefix' => 'doc', 'middleware' => 'doctor'], function () {
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doc.dashboard');
     Route::get('/emp_info', [DoctorController::class, 'emp_info'])->name('doc.emp_info');
     Route::get('/update_emp/{id}', [DoctorController::class, 'update_emp'])->name('doc.update_emp');
     Route::put('/update_emp/{id}', [DoctorController::class, 'update_emp_check'])->name('doc.update_emp_check');
@@ -108,7 +107,7 @@ Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
     Route::get('/cus_detail/{id}', [DoctorController::class, 'cus_detail'])->name('doc.cus_detail');
     Route::get('/appt_schedule', [DoctorController::class, 'appt_schedule'])->name('doc.appt_schedule');
     Route::get('/donate-history/{ngayHienTai}/hom-truoc', [DoctorController::class, 'ngayHomTruoc'])->name('doc.homtruoc');
-    Route::get('/donate-history/{ngayHienTai}/hom-sau', [DoctorController::     class, 'ngayHomSau'])->name('doc.homsau');
+    Route::get('/donate-history/{ngayHienTai}/hom-sau', [DoctorController::class, 'ngayHomSau'])->name('doc.homsau');
     Route::get('/update_cus/{id}', [DoctorController::class, 'update_cus'])->name('doc.update_cus');
     Route::put('/update_cus/{id}', [DoctorController::class, 'update_cus_check'])->name('doc.update_cus_check');
     Route::get('/clinic/{id}', [DoctorController::class, 'clinic'])->name('doc.clinic');
@@ -119,8 +118,8 @@ Route::group(['prefix' => 'doc', 'middleware' => 'doctor'],function () {
 });
 
 
-
-
-
-
-
+Route::group(['prefix' => 'dropshipping'], function () {
+    Route::get('/', [DropshippingController::class, 'login'])->name('ship.login');
+    Route::post('/', [DoctorController::class, 'checklogin'])->name('doc.checklogin');
+    Route::get('/logout', [DoctorController::class, 'logout'])->name('doc.logout');
+});

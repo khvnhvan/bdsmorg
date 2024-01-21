@@ -524,3 +524,87 @@ table {
     position: absolute;
     right: 0;
 }
+
+.landing {
+    color: #414A5D;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.landing-left {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 130%;
+    line-height: 90%;
+}
+
+.landing-right {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.l1,
+.l2,
+.l3,
+.l4 {
+    width: 85%;
+    height: 160px;
+    background-color: #EED9D8;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #668884;
+    text-decoration: none;
+    font-size: 230%;
+    margin-right: 5%;
+}
+
+.l1 div {
+    width: 120px;
+    height: 80%;
+    background-image: url('img/admin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 7%;
+    padding-right: 10%;
+}
+
+
+.l2 div {
+    width: 120px;
+    height: 80%;
+    background-image: url('img/employee.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 7%;
+    padding-right: 10%;
+}
+
+.l3 div {
+    width: 120px;
+    height: 80%;
+    background-image: url('img/doc.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 7%;
+    padding-right: 10%;
+}
+
+.l4 div {
+    width: 120px;
+    height: 80%;
+    background-image: url('img/ship.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 7%;
+    padding-right: 10%;
+}
